@@ -1,0 +1,22 @@
+# Virtual environments
+task1/venv/
+task1/.venv/
+task2/venv/
+task2/.venv/
+
+# VS Code
+task1/.vscode/
+task2/.vscode/
+
+# Data
+task2/data/
+
+# Model weights
+task2/weights/
+
+# Python cache
+**/__pycache__/
+*.py[cod]
+
+# Jupyter
+**/.ipynb_checkpoints/
