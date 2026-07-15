@@ -4,10 +4,13 @@ import torch
 import kornia as K
 import kornia.feature as KF
 
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
-def load_matcher(
-    weights_path: Path = Path("weights/loftr_outdoor.ckpt"),
-):
+DEFAULT_WEIGHTS = PROJECT_ROOT / "weights" / "loftr_outdoor.ckpt"
+
+
+def load_matcher(weights_path: Path = DEFAULT_WEIGHTS):
+
     """
     Load pretrained LoFTR model.
     """
