@@ -141,6 +141,10 @@ Includes:
 
 The pipeline successfully matches satellite images acquired during different seasons.
 
+The figure below shows the best matching tile pair together with the feature correspondences detected by the pretrained LoFTR model.
+
+![LoFTR Matching Result](assets/matching_result.png)
+
 Example result:
 
 - Best tile selected automatically.
@@ -201,7 +205,7 @@ The script automatically:
 
 This repository contains all required deliverables from the assignment:
 
--  Dataset preparation notebook (`dataset_creation.ipynb`)
+-  Dataset preparation and preprocessing notebook (`dataset_creation.ipynb`)
 -  Demo notebook (`demo.ipynb`)
 -  Python implementation of the matching algorithm (`src/`)
 -  Python inference script (`inference.py`)
