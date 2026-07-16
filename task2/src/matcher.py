@@ -157,8 +157,6 @@ def select_best_match(results):
             f"confidence={result['mean_conf']:.3f}"
         )
 
-    print()
-
     print(f"Best tile: {best['coord']}")
 
     print(f"Matches: {best['matches']}")

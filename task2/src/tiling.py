@@ -37,10 +37,7 @@ def process_image(
 
         for x in range(0, W - tile_size + 1, tile_size):
 
-            tile = image[
-                y:y + tile_size,
-                x:x + tile_size,
-            ]
+            tile = image[y:y + tile_size,x:x + tile_size,]
 
             valid_mask = tile.sum(axis=2) > 0
 
