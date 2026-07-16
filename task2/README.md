@@ -82,7 +82,7 @@ The demonstration uses two Sentinel-2 scenes covering the same geographic tile (
 
 The `.SAFE` scenes are not included in this repository due to their size.
 
-### Download dataset or scenes
+## Download dataset or scenes
 
 These two scenes can be downloaded separately from the Kaggle dataset
 https://www.kaggle.com/datasets/isaienkov/deforestation-in-ukraine
@@ -93,14 +93,15 @@ After downloading, place the `.SAFE` folders inside:
 data/
 ```
 
-# Model weights
+## Download Model weights
+
 This project uses the pretrained **LoFTR Outdoor** model.
 
 Weights are not included in the repository.
 
 Download the pretrained weights:
 
-> **[(https://drive.google.com/file/d/1IZag9Q3WLyBI_1RX0QlCC07xINbAIlRp/view?usp=sharing)]**
+> **[https://drive.google.com/file/d/1IZag9Q3WLyBI_1RX0QlCC07xINbAIlRp/view?usp=sharing]**
 
 Place the file here:
 
@@ -136,3 +137,73 @@ Includes:
 - visualizing LoFTR correspondences;
 - reporting matching statistics.
 
+# Results
+
+The pipeline successfully matches satellite images acquired during different seasons.
+
+Example result:
+
+- Best tile selected automatically.
+- More than **9000** feature correspondences.
+- Mean confidence approximately **0.69**.
+
+The approach demonstrates robust matching despite significant seasonal appearance changes.
+
+# Installation
+
+1. **Clone the repository:**
+```bash
+git clone https://github.com/Pasha0923/Quantum-test-task.git
+cd task2
+```
+2. **Create virtual environment (recommended)**
+```bash
+python -m venv venv
+venv\Scripts\activate
+```
+3. **Install dependencies:**
+```bash
+pip install -r requirements.txt
+```
+4. **Additional setup**
+
+Before running the project, make sure you have:
+
+- downloaded the pretrained **LoFTR Outdoor** weights and placed `loftr_outdoor.ckpt` into the `weights/` directory;
+- downloaded the two required Sentinel-2 `.SAFE` scenes and placed them into the `data/` directory.
+
+5. **Run inference**
+
+```bash
+python inference.py
+```
+The script automatically:
+
+- loads Sentinel-2 scenes;
+- loads pretrained LoFTR weights;
+- finds the best matching tiles;
+- visualizes feature correspondences.
+
+# Technologies
+
+- Python
+- PyTorch
+- Kornia
+- LoFTR
+- Rasterio
+- NumPy
+- OpenCV
+- Matplotlib
+- Pandas
+- Jupyter Notebook
+
+# Task deliverables
+
+This repository contains all required deliverables from the assignment:
+
+-  Dataset preparation notebook (`dataset_creation.ipynb`)
+-  Demo notebook (`demo.ipynb`)
+-  Python implementation of the matching algorithm (`src/`)
+-  Python inference script (`inference.py`)
+-  Dataset download instructions
+-  Pretrained model weights download instructions
