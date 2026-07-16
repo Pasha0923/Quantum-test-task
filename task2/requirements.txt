@@ -1,0 +1,10 @@
+torch
+kornia
+opencv-python
+rasterio
+numpy
+matplotlib
+pandas
+jupyter
+notebook
+ipykernel

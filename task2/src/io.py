@@ -1,25 +1,11 @@
 from pathlib import Path
-
 import numpy as np
 import rasterio
-
 
 def find_band(img_dir: Path, band: str) -> Path:
     """
     Find Sentinel-2 band inside IMG_DATA directory.
-
-    Parameters
-    ----------
-    img_dir : Path
-        Path to IMG_DATA directory.
-
-    band : str
-        Band name (e.g. 'B04').
-
-    Returns
-    -------
-    Path
-        Path to requested band.
+    Returns Path to requested band.
     """
 
     files = sorted(img_dir.glob(f"*_{band}.jp2"))

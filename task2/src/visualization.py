@@ -1,20 +1,11 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-
-def show_tiles(
-    tile1: np.ndarray,
-    tile2: np.ndarray,
-):
+def show_tiles(tile1: np.ndarray,tile2: np.ndarray):
     """
     Display two tiles side by side.
     """
-
-    fig, ax = plt.subplots(
-        1,
-        2,
-        figsize=(12, 6),
-    )
+    fig, ax = plt.subplots(1,2,figsize=(12, 6),)
 
     ax[0].imshow(tile1)
     ax[0].set_title("Image 1")
@@ -28,13 +19,7 @@ def show_tiles(
     plt.tight_layout()
     plt.show()
 
-
-def draw_matches(
-    tile1: np.ndarray,
-    tile2: np.ndarray,
-    pred,
-    top_k: int = 100,
-):
+def draw_matches(tile1: np.ndarray,tile2: np.ndarray,pred,top_k: int = 100):
     """
     Draw LoFTR matches using Matplotlib.
     """
@@ -67,19 +52,9 @@ def draw_matches(
 
     plt.imshow(canvas)
 
-    plt.scatter(
-        mkpts0[:, 0],
-        mkpts0[:, 1],
-        s=10,
-        c="lime",
-    )
+    plt.scatter(mkpts0[:, 0], mkpts0[:, 1], s=10, c="lime")
 
-    plt.scatter(
-        mkpts1[:, 0] + w1,
-        mkpts1[:, 1],
-        s=10,
-        c="lime",
-    )
+    plt.scatter(mkpts1[:, 0] + w1, mkpts1[:, 1], s=10, c="lime",)
 
     rng = np.random.default_rng(42)
 

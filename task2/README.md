@@ -46,7 +46,6 @@ The complete workflow consists of the following stages:
 task2/
 │
 ├── data/                  # Sentinel-2 .SAFE scenes (not included)
-│
 ├── weights/               # Pretrained LoFTR weights (not included)
 │
 ├── notebooks/
@@ -190,16 +189,16 @@ The script automatically:
 
 # Technologies
 
-- Python
-- PyTorch
-- Kornia
-- LoFTR
-- Rasterio
-- NumPy
-- OpenCV
-- Matplotlib
-- Pandas
-- Jupyter Notebook
+- python
+- torch
+- torchvision
+- kornia
+- rasterio
+- numpy
+- opencv-python
+- matplotlib
+- pandas
+- jupyter notebook
 
 # Task deliverables
 
