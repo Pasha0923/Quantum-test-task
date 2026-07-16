@@ -100,7 +100,7 @@ Weights are not included in the repository.
 
 Download the pretrained weights:
 
-> **[ADD GOOGLE DRIVE LINK](https://drive.google.com/file/d/1IZag9Q3WLyBI_1RX0QlCC07xINbAIlRp/view?usp=sharing)**
+> **[(https://drive.google.com/file/d/1IZag9Q3WLyBI_1RX0QlCC07xINbAIlRp/view?usp=sharing)]**
 
 Place the file here:
 

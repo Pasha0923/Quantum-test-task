@@ -1,7 +1,5 @@
-from pathlib import Path
-
 import numpy as np
-
+from pathlib import Path
 from src.io import read_rgb_bands
 from src.io import find_img_data
 
