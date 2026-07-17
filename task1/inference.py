@@ -1,21 +1,23 @@
 import torch
 
-from transformers import (AutoTokenizer,AutoModelForTokenClassification)
+from transformers import (
+    AutoModelForTokenClassification,
+    AutoTokenizer,
+)
 
 from src.config import (MODEL_OUTPUT_DIR,ID2LABEL)
 
-
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-tokenizer = AutoTokenizer.from_pretrained(str(MODEL_OUTPUT_DIR))
-model = AutoModelForTokenClassification.from_pretrained(str(MODEL_OUTPUT_DIR)).to(device)
+tokenizer = AutoTokenizer.from_pretrained(MODEL_OUTPUT_DIR)
+model = AutoModelForTokenClassification.from_pretrained(MODEL_OUTPUT_DIR).to(device)
 
 model.eval()
 
 
 def predict(text: str):
     """
-    Predict mountain entities in text.
+    Predict token labels.
     """
 
     inputs = tokenizer(
@@ -32,41 +34,27 @@ def predict(text: str):
     with torch.no_grad():
         outputs = model(**inputs)
 
-    predictions = outputs.logits.argmax(dim=-1)
+    predictions = outputs.logits.argmax(dim=-1)[0]
 
     tokens = tokenizer.convert_ids_to_tokens(
         inputs["input_ids"][0]
     )
 
     labels = [
-        ID2LABEL[label.item()]
-        for label in predictions[0]
+        ID2LABEL[pred.item()]
+        for pred in predictions
     ]
 
     return tokens, labels
 
 
-def print_predictions(text: str):
-
-    tokens, labels = predict(text)
-
-    tokens, labels = merge_wordpiece_tokens(tokens, labels)
-
-    print(f"\nText:\n{text}\n")
-
-    print(f"{'Token':<25}Label")
-    print("-" * 40)
-
-    for token, label in zip(tokens, labels):
-        print(f"{token:<25}{label}")
-        
-def merge_wordpiece_tokens(tokens, labels):
+def extract_mountains(tokens, labels):
     """
-    Merge WordPiece tokens into complete words.
+    Extract mountain names from BIO predictions.
     """
 
-    merged_tokens = []
-    merged_labels = []
+    mountains = []
+    current = ""
 
     for token, label in zip(tokens, labels):
 
@@ -74,32 +62,77 @@ def merge_wordpiece_tokens(tokens, labels):
             continue
 
         if token.startswith("##"):
-            merged_tokens[-1] += token[2:]
+            piece = token[2:]
         else:
-            merged_tokens.append(token)
-            merged_labels.append(label)
+            piece = token
 
-    return merged_tokens, merged_labels
+        if label == "B-MOUNTAIN":
+
+            if current:
+                mountains.append(current)
+
+            current = piece
+
+        elif label == "I-MOUNTAIN":
+
+            if not current:
+                current = piece
+
+            elif token.startswith("##"):
+                current += piece
+
+            else:
+                current += " " + piece
+
+        else:
+
+            if current:
+                mountains.append(current)
+                current = ""
+
+    if current:
+        mountains.append(current)
+
+    return mountains
+
+
+def print_predictions(text: str):
+    """
+    Print extracted mountain names.
+    """
+
+    tokens, labels = predict(text)
+
+    mountains = extract_mountains(tokens, labels)
+
+    print("\n" + "-" * 50)
+    print(f"Input text:\n{text}\n")
+
+    if mountains:
+        print("Extracted mountain(s):")
+
+        for mountain in mountains:
+            print(f"• {mountain.title()}")
+
+    else:
+        print("No mountain names found.")
+
+    print("-" * 50)
+
 
 def main():
+
     while True:
 
-        text = input("\nEnter text (or 'exit' to quit): ")
+        text = input("\nEnter text ('exit' or 'quit' to finish program): ").strip()
 
-        if text.lower() == "exit":
+        if text.lower() in ("exit", "quit"):
             break
 
+        if not text:
+            continue
+
         print_predictions(text)
-
-    # examples = [
-    #     "I climbed Mount Everest last year.",
-    #     "We travelled across the Alps.",
-    #     "Snow remained on Hinterer Seelenkogel throughout the year.",
-    #     "I like programming in Python.",
-    # ]
-
-    # for sentence in examples:
-    #     print_predictions(sentence)
 
 
 if __name__ == "__main__":

@@ -59,7 +59,69 @@ TEMPLATES = [
     "The mountain rescue exercise took place near {mountain}.",
 ]
 
+NEGATIVE_EXAMPLES = 2000
+PEOPLE = [
+    "John", "Emma", "Michael", "Sarah",
+    "David", "Emily", "Daniel", "Sophia",
+]
 
+CITIES = [
+    "Paris", "London", "Kyiv", "Berlin",
+    "Rome", "Tokyo", "Madrid", "Warsaw",
+]
+
+COMPANIES = [
+    "OpenAI", "Google", "Microsoft",
+    "Apple", "Amazon", "Meta", "NVIDIA",
+]
+
+TECHNOLOGIES = [
+    "Python",
+    "TensorFlow",
+    "PyTorch",
+    "Docker",
+    "Linux",
+    "Kubernetes",
+]
+
+TOPICS = [
+    "artificial intelligence",
+    "machine learning",
+    "computer vision",
+    "natural language processing",
+    "data science",
+]
+
+ORGANIZATIONS = [
+    "NASA",
+    "UNESCO",
+    "World Health Organization",
+    "European Union",
+]
+
+NEGATIVE_TEMPLATES = [
+
+    "{person} visited {city} during the summer.",
+
+    "{company} announced a new product yesterday.",
+
+    "{technology} is widely used in modern software development.",
+
+    "{organization} published a new report this week.",
+
+    "Researchers presented a paper about {topic}.",
+
+    "{person} works as a software engineer at {company}.",
+
+    "Students are learning {technology} at the university.",
+
+    "{city} hosted an international technology conference.",
+
+    "Experts discussed {topic} during the workshop.",
+
+    "{company} invested heavily in {topic}.",
+
+]
 # ============================================================
 # Utility functions
 # ============================================================
@@ -172,6 +234,46 @@ def build_dataset(mountains: list[str]) -> list[dict]:
     return dataset
 
 
+def build_negative_dataset(start_id: int) -> list[dict]:
+    """
+    Generate negative NER examples without mountain names.
+    """
+
+    dataset = []
+
+    sample_id = start_id
+
+    for _ in range(NEGATIVE_EXAMPLES):
+
+        template = random.choice(NEGATIVE_TEMPLATES)
+
+        sentence = template.format(
+            person=random.choice(PEOPLE),
+            city=random.choice(CITIES),
+            company=random.choice(COMPANIES),
+            technology=random.choice(TECHNOLOGIES),
+            organization=random.choice(ORGANIZATIONS),
+            topic=random.choice(TOPICS),
+        )
+
+        tokens = tokenize(sentence)
+
+        labels = [LABELS["O"]] * len(tokens)
+
+        dataset.append(
+            {
+                "id": sample_id,
+                "sentence": sentence,
+                "tokens": tokens,
+                "ner_tags": labels,
+            }
+        )
+
+        sample_id += 1
+
+    return dataset
+
+
 def save_dataset(dataset: list[dict], output_path: Path):
     """
     Save dataset as JSON.
@@ -236,8 +338,19 @@ def main():
 
     print("Generating dataset...")
 
-    dataset = build_dataset(mountains)
+    positive_dataset = build_dataset(mountains)
 
+    negative_dataset = build_negative_dataset(
+        start_id=len(positive_dataset)
+)
+
+    dataset = positive_dataset + negative_dataset
+
+    random.shuffle(dataset)
+
+    for idx, sample in enumerate(dataset):
+        sample["id"] = idx
+        
     print()
 
     print("Saving dataset...")
