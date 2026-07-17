@@ -2,11 +2,10 @@ from pathlib import Path
 
 import pandas as pd
 import requests
-
-
-INDEX_URL = (
-    "https://raw.githubusercontent.com/open-peaks/data/master/_index.geojson"
-)
+# Скрипт который один раз скачает или сформирует mountains.csv из открытого источника, а затем generate_dataset.py будет использовать уже готовый файл.
+# Например, существует открытый проект Open Peaks, содержащий данные о горах мира в открытом формате.
+# Мы нашли отличный репозиторий Open Peaks. В нём каждая гора хранится отдельным GeoJSON-файлом, а структура каталогов постоянна.
+INDEX_URL = ("https://raw.githubusercontent.com/open-peaks/data/master/_index.geojson")
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
@@ -34,12 +33,6 @@ def download_index() -> dict:
 def extract_mountains(data: dict) -> list[str]:
     """
     Extract unique mountain names from the GeoJSON data.
-
-    Args:
-        data: Parsed GeoJSON dictionary.
-
-    Returns:
-        Sorted list of unique mountain names.
     """
     mountains = []
 

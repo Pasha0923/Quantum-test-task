@@ -2,34 +2,15 @@ from pathlib import Path
 import json
 import random
 import re
-
 import pandas as pd
-
+from config import MOUNTAINS_PATH, DATASET_PATH
 
 # ============================================================
 # Configuration
 # ============================================================
 
-PROJECT_ROOT = Path(__file__).resolve().parent.parent
-
-RAW_DATA_PATH = (
-    PROJECT_ROOT
-    / "data"
-    / "raw"
-    / "mountains.csv"
-)
-
-OUTPUT_PATH = (
-    PROJECT_ROOT
-    / "data"
-    / "processed"
-    / "ner_dataset.json"
-)
-
 MAX_MOUNTAINS = 1000
-
 SENTENCES_PER_MOUNTAIN = 5
-
 RANDOM_SEED = 42
 
 
@@ -41,7 +22,7 @@ LABELS = {
 
 
 # ============================================================
-# Sentence templates
+# Sentence templates(30 разных контекстов)Есть разные контексты: туризм, география, альпинизм, исследования, погода, природа.
 # ============================================================
 
 TEMPLATES = [
@@ -117,7 +98,6 @@ def sample_mountains(mountains: list[str], max_mountains: int) -> list[str]:
 def tokenize(sentence: str) -> list[str]:
     """
     Simple tokenizer.
-
     Keeps punctuation as separate tokens.
     """
 
@@ -244,7 +224,7 @@ def main():
     random.seed(RANDOM_SEED)
     print("Loading mountain names...")
 
-    mountains = load_mountains(RAW_DATA_PATH)
+    mountains = load_mountains(MOUNTAINS_PATH)
 
     print(f"Loaded {len(mountains)} mountains.")
 
@@ -262,7 +242,7 @@ def main():
 
     print("Saving dataset...")
 
-    save_dataset(dataset,OUTPUT_PATH,)
+    save_dataset(dataset,DATASET_PATH)
 
     print()
 
@@ -270,7 +250,7 @@ def main():
 
     print()
 
-    print(f"Dataset saved to:\n{OUTPUT_PATH}")
+    print(f"Dataset saved to:\n{DATASET_PATH}")
 
 
 if __name__ == "__main__":
