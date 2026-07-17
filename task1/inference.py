@@ -7,9 +7,8 @@ from src.config import (MODEL_OUTPUT_DIR,ID2LABEL)
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-tokenizer = AutoTokenizer.from_pretrained(MODEL_OUTPUT_DIR)
-
-model = AutoModelForTokenClassification.from_pretrained(MODEL_OUTPUT_DIR).to(device)
+tokenizer = AutoTokenizer.from_pretrained(str(MODEL_OUTPUT_DIR))
+model = AutoModelForTokenClassification.from_pretrained(str(MODEL_OUTPUT_DIR)).to(device)
 
 model.eval()
 
@@ -48,21 +47,39 @@ def predict(text: str):
 
 
 def print_predictions(text: str):
-    """
-    Print model predictions.
-    """
 
     tokens, labels = predict(text)
 
-    print(f"\nText: {text}\n")
+    tokens, labels = merge_wordpiece_tokens(tokens, labels)
+
+    print(f"\nText:\n{text}\n")
+
+    print(f"{'Token':<25}Label")
+    print("-" * 40)
+
+    for token, label in zip(tokens, labels):
+        print(f"{token:<25}{label}")
+        
+def merge_wordpiece_tokens(tokens, labels):
+    """
+    Merge WordPiece tokens into complete words.
+    """
+
+    merged_tokens = []
+    merged_labels = []
 
     for token, label in zip(tokens, labels):
 
         if token in ("[CLS]", "[SEP]", "[PAD]"):
             continue
 
-        print(f"{token:<20}{label}")
+        if token.startswith("##"):
+            merged_tokens[-1] += token[2:]
+        else:
+            merged_tokens.append(token)
+            merged_labels.append(label)
 
+    return merged_tokens, merged_labels
 
 def main():
     while True:

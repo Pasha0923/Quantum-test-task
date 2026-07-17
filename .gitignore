@@ -12,6 +12,7 @@ task2/.vscode/
 task2/data/
 
 # Model weights
+models/
 task2/weights/
 
 # Python cache
