@@ -44,7 +44,6 @@ def predict(text: str):
         ID2LABEL[pred.item()]
         for pred in predictions
     ]
-
     return tokens, labels
 
 
@@ -119,6 +118,14 @@ def print_predictions(text: str):
 
     print("-" * 50)
 
+
+def predict_mountains(text: str):
+    """
+    Return extracted mountain names.
+    """
+
+    tokens, labels = predict(text)
+    return extract_mountains(tokens, labels)
 
 def main():
 

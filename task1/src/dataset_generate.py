@@ -102,23 +102,14 @@ ORGANIZATIONS = [
 NEGATIVE_TEMPLATES = [
 
     "{person} visited {city} during the summer.",
-
     "{company} announced a new product yesterday.",
-
     "{technology} is widely used in modern software development.",
-
     "{organization} published a new report this week.",
-
     "Researchers presented a paper about {topic}.",
-
     "{person} works as a software engineer at {company}.",
-
     "Students are learning {technology} at the university.",
-
     "{city} hosted an international technology conference.",
-
     "Experts discussed {topic} during the workshop.",
-
     "{company} invested heavily in {topic}.",
 
 ]
@@ -350,7 +341,7 @@ def main():
 
     for idx, sample in enumerate(dataset):
         sample["id"] = idx
-        
+
     print()
 
     print("Saving dataset...")
