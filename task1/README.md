@@ -221,7 +221,7 @@ pip install -r requirements.txt
 Before running the project, make sure you have:
 - downloaded the trained BERT model and placed the `bert_ner/` directory into `models/`.
 
-## Run Inference
+# Run Inference
 
 Run interactive command-line interface :
 
@@ -236,6 +236,6 @@ We climbed Mount Elbrus before visiting Mont Blanc.
 
 Detected mountains:
 
-• Mount Elbrus
+• **Mount Elbrus**
 
-• Mont Blanc
+• **Mont Blanc**

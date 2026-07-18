@@ -23,6 +23,7 @@ task2/weights/
 **/.ipynb_checkpoints/
 demo_copy.ipynb
 test.ipynb
+report.ipynb
 
 _index.geojson
 test.py
