@@ -1,7 +1,7 @@
 # Mountain Named Entity Recognition (NER)
 
 ## Project overview
-This project implements a Named Entity Recognition (NER) system for detecting mountain names in English text using a fine-tuned BERT model.
+This project implements a Named Entity Recognition (NER) system for detecting mountain names using a fine-tuned BERT model.
 
 The project includes:
 
@@ -30,28 +30,26 @@ task1/
 │
 ├── data/
 │   ├── raw/
-│   │   └── mountains.csv
-│   │
+│   │   └── mountains.csv     # Collected mountain names
 │   └── processed/
-│       └── ner_dataset.json
-│
+│       └──ner_dataset.json   # Generated BIO-annotated dataset
+│ 
 ├── models/
-│   └── bert_ner/
+│   └── bert_ner/             # Pretrained BERT model (not included)
 │
 ├── notebooks/
-│   ├── dataset_creation.ipynb
-│   └── demo.ipynb
+│   ├── dataset_creation.ipynb # Dataset creation pipeline
+│   └── demo.ipynb             # Pipeline demonstration
 │
 ├── src/
-│   ├── config.py
-│   ├── dataset.py
-│   ├── download_mountains.py
-│   ├── generate_dataset.py
-│   ├── model.py
-│   └── train.py
+│   ├── config.py             # Project configuration
+│   ├── preprocessing.py      # Dataset preprocessing
+│   ├── download_mountains.py # Download mountain names
+│   ├── dataset_generate.py   # Synthetic dataset generation 
+│   └── train.py              # Model training
 │
-├── inference.py
-├── requirements.txt
+├── inference.py              # Run the complete pipeline
+├── requirements.txt          # Project dependencies
 └── README.md
 ```
 
@@ -83,15 +81,9 @@ python src/generate_dataset.py
 
 This creates:
 
-```text
+```bash
 data/processed/ner_dataset.json
 ```
-
-The generation process includes:
-
-- positive examples containing mountain names;
-- negative examples without mountain entities;
-- automatic BIO label generation.
 
 A detailed explanation of the dataset generation process is available in:
 
@@ -108,35 +100,18 @@ notebooks/dataset_creation.ipynb
 | Total Samples | 7000 |
 | Annotation Scheme | BIO |
 
-## Download Model weights
-
-The fine-tuned BERT model is not included in this repository because of its size.
-
-Download the trained model from Google Drive:
-
-```bash
-https://drive.google.com/drive/folders/1yoR0vnkr2D3vfnbboaHnhEoxUwxKqh8J?usp=sharing
-```
-
-### After downloading:
-
-**1. Extract the downloaded archive**
-
-**2. Copy model weights in folder models/**
-
-**Final project structure:**
-
-
-```bash
-models/
-└── bert_ner/
-    ├── config.json
-    ├── model.safetensors
-    ├── tokenizer_config.json
-    ├── tokenizer.json
-    ├── training_args.bin
-    
-```
+# Technologies
+- python
+- torch
+- transformers
+- datasets
+- evaluate
+- seqeval
+- scikit-learn
+- numpy
+- pandas
+- matplotlib
+- accelerate
 
 ## Model Architecture
 
@@ -171,6 +146,44 @@ Training strategy included:
 | LEARNING_RATE | 2e-5 |
 | NUM_EPOCHS| 3 |
 | WEIGHT_DECAY  | 0.01 |
+
+
+## Model Training from Scratch
+
+If you prefer to train the model instead of downloading the pretrained model, run:
+
+```bash
+python src/train.py
+```
+
+## Download Model weights
+
+The fine-tuned BERT model is not included in this repository because of its size.
+
+Download the trained model from Google Drive:
+
+```bash
+https://drive.google.com/drive/folders/1yoR0vnkr2D3vfnbboaHnhEoxUwxKqh8J?usp=sharing
+```
+
+### After downloading:
+
+**1. Extract the downloaded archive**
+
+**2. Copy model weights in folder models/**
+
+**Final project structure:**
+
+```bash
+models/
+└── bert_ner/
+    ├── config.json
+    ├── model.safetensors
+    ├── tokenizer_config.json
+    ├── tokenizer.json
+    ├── training_args.bin
+    
+```
 
 ## Inference
 
@@ -212,7 +225,7 @@ It can be used to interactively test the pipeline.
 1. **Clone the repository:**
 ```bash
 git clone https://github.com/Pasha0923/Quantum-test-task.git
-cd task2
+cd task1
 ```
 2. **Create virtual environment (recommended)**
 ```bash
@@ -226,5 +239,6 @@ pip install -r requirements.txt
 4. **Additional setup**
 
 Before running the project, make sure you have:
-
 - downloaded the trained BERT model and placed the `bert_ner/` directory into `models/`.
+
+
