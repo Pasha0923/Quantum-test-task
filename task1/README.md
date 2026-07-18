@@ -25,7 +25,7 @@ The project includes:
 
 ## Project Structure
 
-```
+```bash
 task1/
 │
 ├── data/
@@ -53,3 +53,178 @@ task1/
 ├── inference.py
 ├── requirements.txt
 └── README.md
+```
+
+## Dataset Creation
+
+The dataset is generated automatically in two steps.
+
+### 1. Collect Mountain Names
+
+Download mountain names from the Open Peaks dataset:
+
+```bash 
+python src/download_mountains.py
+```
+
+This creates:
+
+```bash
+data/raw/mountains.csv
+```
+
+### 2. Generate the NER Dataset
+
+Generate positive and negative examples with automatic BIO annotations:
+
+```bash
+python src/generate_dataset.py
+```
+
+This creates:
+
+```text
+data/processed/ner_dataset.json
+```
+
+The generation process includes:
+
+- positive examples containing mountain names;
+- negative examples without mountain entities;
+- automatic BIO label generation.
+
+A detailed explanation of the dataset generation process is available in:
+
+```bash
+notebooks/dataset_creation.ipynb
+```
+## Dataset Summary
+
+| Property | Value |
+|----------|------:|
+| Mountain Names | 2924 |
+| Positive Samples | 5000 |
+| Negative Samples | 2000 |
+| Total Samples | 7000 |
+| Annotation Scheme | BIO |
+
+## Download Model weights
+
+The fine-tuned BERT model is not included in this repository because of its size.
+
+Download the trained model from Google Drive:
+
+```bash
+https://drive.google.com/drive/folders/1yoR0vnkr2D3vfnbboaHnhEoxUwxKqh8J?usp=sharing
+```
+
+### After downloading:
+
+**1. Extract the downloaded archive**
+
+**2. Copy model weights in folder models/**
+
+**Final project structure:**
+
+
+```bash
+models/
+└── bert_ner/
+    ├── config.json
+    ├── model.safetensors
+    ├── tokenizer_config.json
+    ├── tokenizer.json
+    ├── training_args.bin
+    
+```
+
+## Model Architecture
+
+The model is based on a pretrained **BERT** encoder fine-tuned for token classification.
+
+Input Text ──> BERT Tokenizer ──> Pretrained BERT Encoder ──> Token Classification Head ───> BIO Labels
+
+The token classification head (dropout and linear classification layer) is provided by the Hugging Face `AutoModelForTokenClassification` implementation.
+
+Unlike text classification, the model predicts a label for every token in the input sequence. 
+
+## Training Strategy
+
+The model was fine-tuned using the Hugging Face Transformers framework.
+
+Training strategy included:
+
+- Fine-tuning a pretrained BERT model.
+- Automatic BIO annotation generation.
+- Training on a balanced set of positive and negative examples.
+- Learning rate scheduling.
+
+## Model Training Configuration
+
+| Parameter | Value |
+|-----------|-------|
+
+| MODEL_NAME | bert-base-uncased |  
+| MAX_LENGTH | 128 |
+| BATCH_SIZE | 16 |
+| TEST_SIZE  | 0.2 |
+| LEARNING_RATE | 2e-5 |
+| NUM_EPOCHS| 3 |
+| WEIGHT_DECAY  | 0.01 |
+
+## Inference
+
+Run interactive command-line interface :
+
+```bash
+python inference.py
+```
+
+Example:
+
+Input:
+We climbed Mount Elbrus before visiting Mont Blanc.
+
+Detected mountains:
+
+• Mount Elbrus
+• Mont Blanc
+
+
+## Demo Notebook
+
+An interactive notebook demonstration is also available:
+
+```bash
+notebooks/demo.ipynb
+```
+
+The notebook demonstrates:
+
+- loading the trained model;
+- running inference on custom text;
+- extracting detected mountain entities.
+
+It can be used to interactively test the pipeline.
+
+# Installation
+
+1. **Clone the repository:**
+```bash
+git clone https://github.com/Pasha0923/Quantum-test-task.git
+cd task2
+```
+2. **Create virtual environment (recommended)**
+```bash
+python -m venv venv
+venv\Scripts\activate
+```
+3. **Install dependencies:**
+```bash
+pip install -r requirements.txt
+```
+4. **Additional setup**
+
+Before running the project, make sure you have:
+
+- downloaded the trained BERT model and placed the `bert_ner/` directory into `models/`.
