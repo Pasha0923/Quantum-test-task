@@ -100,19 +100,6 @@ notebooks/dataset_creation.ipynb
 | Total Samples | 7000 |
 | Annotation Scheme | BIO |
 
-# Technologies
-- python
-- torch
-- transformers
-- datasets
-- evaluate
-- seqeval
-- scikit-learn
-- numpy
-- pandas
-- matplotlib
-- accelerate
-
 ## Model Architecture
 
 The model is based on a pretrained **BERT** encoder fine-tuned for token classification.
@@ -184,25 +171,6 @@ models/
     
 ```
 
-## Inference
-
-Run interactive command-line interface :
-
-```bash
-python inference.py
-```
-
-Example:
-
-Input:
-We climbed Mount Elbrus before visiting Mont Blanc.
-
-Detected mountains:
-
-• Mount Elbrus
-• Mont Blanc
-
-
 ## Demo Notebook
 
 An interactive notebook demonstration is also available:
@@ -218,6 +186,19 @@ The notebook demonstrates:
 - extracting detected mountain entities.
 
 It can be used to interactively test the pipeline.
+
+# Technologies
+- python
+- torch
+- transformers
+- datasets
+- evaluate
+- seqeval
+- scikit-learn
+- numpy
+- pandas
+- matplotlib
+- accelerate
 
 # Installation
 
@@ -240,4 +221,21 @@ pip install -r requirements.txt
 Before running the project, make sure you have:
 - downloaded the trained BERT model and placed the `bert_ner/` directory into `models/`.
 
+## Run Inference
 
+Run interactive command-line interface :
+
+```bash
+python inference.py
+```
+
+Example:
+
+Input:
+We climbed Mount Elbrus before visiting Mont Blanc.
+
+Detected mountains:
+
+• Mount Elbrus
+
+• Mont Blanc
