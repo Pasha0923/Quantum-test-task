@@ -1,19 +1,11 @@
 import torch
-
-from transformers import (
-    AutoModelForTokenClassification,
-    AutoTokenizer,
-)
-
+from transformers import (AutoModelForTokenClassification,AutoTokenizer)
 from src.config import (MODEL_OUTPUT_DIR,ID2LABEL)
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-
 tokenizer = AutoTokenizer.from_pretrained(MODEL_OUTPUT_DIR)
 model = AutoModelForTokenClassification.from_pretrained(MODEL_OUTPUT_DIR).to(device)
-
 model.eval()
-
 
 def predict(text: str):
     """

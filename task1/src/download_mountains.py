@@ -1,21 +1,9 @@
 from pathlib import Path
-
+from src.config import (MOUNTAINS_PATH)
 import pandas as pd
 import requests
-# Скрипт который один раз скачает или сформирует mountains.csv из открытого источника, а затем generate_dataset.py будет использовать уже готовый файл.
-# Например, существует открытый проект Open Peaks, содержащий данные о горах мира в открытом формате.
-# Мы нашли отличный репозиторий Open Peaks. В нём каждая гора хранится отдельным GeoJSON-файлом, а структура каталогов постоянна.
+
 INDEX_URL = ("https://raw.githubusercontent.com/open-peaks/data/master/_index.geojson")
-
-PROJECT_ROOT = Path(__file__).resolve().parent.parent
-
-OUTPUT_PATH = (
-    PROJECT_ROOT
-    / "data"
-    / "raw"
-    / "mountains.csv"
-)
-
 
 def download_index() -> dict:
     """
@@ -86,11 +74,11 @@ def main():
 
     save_csv(
         mountains,
-        OUTPUT_PATH,
+        MOUNTAINS_PATH,
     )
 
     print(f"Successfully saved {len(mountains)} mountain names.")
-    print(f"Output file: {OUTPUT_PATH}")
+    print(f"Output file: {MOUNTAINS_PATH}")
 
 
 if __name__ == "__main__":

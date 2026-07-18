@@ -7,7 +7,6 @@ from config import (MODEL_NAME,MODEL_OUTPUT_DIR,LABEL_LIST,LABEL2ID,ID2LABEL,BAT
 
 metric = evaluate.load("seqeval")
 
-
 def compute_metrics(eval_prediction):
     """
     Compute evaluation metrics for token classification.

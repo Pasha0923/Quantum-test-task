@@ -5,14 +5,10 @@ import re
 import pandas as pd
 from config import MOUNTAINS_PATH, DATASET_PATH
 
-# ============================================================
 # Configuration
-# ============================================================
-
 MAX_MOUNTAINS = 1000
 SENTENCES_PER_MOUNTAIN = 5
 RANDOM_SEED = 42
-
 
 LABELS = {
     "O": 0,
@@ -20,11 +16,7 @@ LABELS = {
     "I-MOUNTAIN": 2,
 }
 
-
-# ============================================================
-# Sentence templates(30 разных контекстов)Есть разные контексты: туризм, география, альпинизм, исследования, погода, природа.
-# ============================================================
-
+# Sentence templates
 TEMPLATES = [
 
     "The expedition reached {mountain} after three days of climbing.",
@@ -113,10 +105,8 @@ NEGATIVE_TEMPLATES = [
     "{company} invested heavily in {topic}.",
 
 ]
-# ============================================================
-# Utility functions
-# ============================================================
 
+# Utility functions
 def load_mountains(csv_path: Path) -> list[str]:
     """
     Load mountain names from CSV.
@@ -158,7 +148,6 @@ def tokenize(sentence: str) -> list[str]:
         r"\w+(?:[-']\w+)*|[^\w\s]",
         sentence,
     )
-
 
 def create_bio_labels(tokens: list[str], mountain: str) -> list[int]:
     """
@@ -312,7 +301,6 @@ def print_statistics(dataset: list[dict],mountains: list[str]):
         )
     )
 
-
 def main():
     random.seed(RANDOM_SEED)
     print("Loading mountain names...")
@@ -331,9 +319,7 @@ def main():
 
     positive_dataset = build_dataset(mountains)
 
-    negative_dataset = build_negative_dataset(
-        start_id=len(positive_dataset)
-)
+    negative_dataset = build_negative_dataset(start_id=len(positive_dataset))
 
     dataset = positive_dataset + negative_dataset
 

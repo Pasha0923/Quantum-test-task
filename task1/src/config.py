@@ -1,9 +1,6 @@
 from pathlib import Path
 
-# ============================================================
 # Project paths
-# ============================================================
-
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
 DATA_DIR = PROJECT_ROOT / "data"
@@ -15,17 +12,13 @@ DATASET_PATH = PROCESSED_DATA_DIR / "ner_dataset.json"
 
 MODEL_OUTPUT_DIR = PROJECT_ROOT / "models" / "bert_ner"
 
-# ============================================================
-# Model
-# ============================================================
 
+# Model
 MODEL_NAME = "bert-base-uncased"
 MAX_LENGTH = 128
 
-# ============================================================
-# Training
-# ============================================================
 
+# Training
 TEST_SIZE = 0.2
 RANDOM_SEED = 42
 BATCH_SIZE = 16
@@ -34,10 +27,7 @@ NUM_EPOCHS = 3
 WEIGHT_DECAY = 0.01
 
 
-# ============================================================
 # Labels
-# ============================================================
-
 LABEL_LIST = [
     "O",
     "B-MOUNTAIN",
