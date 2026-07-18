@@ -41,7 +41,7 @@ The complete workflow consists of the following stages:
 8. Select the best matching tile pair.
 9. Visualize the detected correspondences.
 
-## 🗂️ Repository structure
+## Project structure
 ```bash
 task2/
 │
@@ -100,8 +100,9 @@ Weights are not included in the repository.
 
 Download the pretrained weights:
 
-> **[https://drive.google.com/file/d/1IZag9Q3WLyBI_1RX0QlCC07xINbAIlRp/view?usp=sharing]**
-
+```bash
+https://drive.google.com/file/d/1IZag9Q3WLyBI_1RX0QlCC07xINbAIlRp/view?usp=sharing
+```
 Place the file here:
 
 ```text

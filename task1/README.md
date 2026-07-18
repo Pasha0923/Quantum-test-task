@@ -136,9 +136,8 @@ Training strategy included:
 
 ## Model Training Configuration
 
-| Parameter | Value |
-|-----------|-------|
-
+| Parameter  | Value |
+|----------- |-------|
 | MODEL_NAME | bert-base-uncased |  
 | MAX_LENGTH | 128 |
 | BATCH_SIZE | 16 |
