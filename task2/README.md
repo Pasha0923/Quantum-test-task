@@ -84,12 +84,12 @@ The `.SAFE` scenes are not included in this repository due to their size.
 ## Download dataset or scenes
 
 These two scenes can be downloaded separately from the Kaggle dataset
-```bash
+
 https://www.kaggle.com/datasets/isaienkov/deforestation-in-ukraine?select=S2A_MSIL1C_20160621T084012_N0204_R064_T36UYA_20160621T084513
-```
-```bash
+
+
 https://www.kaggle.com/datasets/isaienkov/deforestation-in-ukraine?select=S2A_MSIL1C_20160212T084052_N0201_R064_T36UYA_20160212T084510
-```
+
 
 After downloading, place the `.SAFE` folders inside:
 
@@ -105,9 +105,8 @@ Weights are not included in the repository.
 
 Download the pretrained weights:
 
-```bash
 https://drive.google.com/file/d/1IZag9Q3WLyBI_1RX0QlCC07xINbAIlRp/view?usp=sharing
-```
+
 Place the file here:
 
 ```text

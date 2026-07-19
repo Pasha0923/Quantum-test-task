@@ -148,9 +148,7 @@ The fine-tuned BERT model is not included in this repository because of its size
 
 Download the trained model from Google Drive:
 
-```bash
 https://drive.google.com/drive/folders/1yoR0vnkr2D3vfnbboaHnhEoxUwxKqh8J?usp=sharing
-```
 
 ### After downloading:
 
