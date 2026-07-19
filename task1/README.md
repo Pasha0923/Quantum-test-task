@@ -1,4 +1,4 @@
-# Mountain Named Entity Recognition (NER)
+# Task 1: Mountain Named Entity Recognition (NER)
 
 ## Project overview
 This project implements a Named Entity Recognition (NER) system for detecting mountain names using a fine-tuned BERT model.
