@@ -44,7 +44,7 @@ The complete workflow consists of the following stages:
 ## Project structure
 ```bash
 task2/
-│
+│── assets/                # image matching result
 ├── data/                  # Sentinel-2 .SAFE scenes (not included)
 ├── weights/               # Pretrained LoFTR weights (not included)
 │
@@ -84,7 +84,12 @@ The `.SAFE` scenes are not included in this repository due to their size.
 ## Download dataset or scenes
 
 These two scenes can be downloaded separately from the Kaggle dataset
-https://www.kaggle.com/datasets/isaienkov/deforestation-in-ukraine
+```bash
+https://www.kaggle.com/datasets/isaienkov/deforestation-in-ukraine?select=S2A_MSIL1C_20160621T084012_N0204_R064_T36UYA_20160621T084513
+```
+```bash
+https://www.kaggle.com/datasets/isaienkov/deforestation-in-ukraine?select=S2A_MSIL1C_20160212T084052_N0201_R064_T36UYA_20160212T084510
+```
 
 After downloading, place the `.SAFE` folders inside:
 
