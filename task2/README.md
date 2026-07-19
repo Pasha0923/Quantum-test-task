@@ -97,6 +97,14 @@ After downloading, place the `.SAFE` folders inside:
 data/
 ```
 
+**Final project structure:**
+
+```bash
+data/
+    ├── S2A_MSIL1C_20160212T084052_N0201_R064_T36UYA_20160212T084510.SAFE
+    ├── S2A_MSIL1C_20160621T084012_N0204_R064_T36UYA_20160621T084513.SAFE 
+```
+
 ## Download Model weights
 
 This project uses the pretrained **LoFTR Outdoor** model.
@@ -109,7 +117,7 @@ https://drive.google.com/file/d/1IZag9Q3WLyBI_1RX0QlCC07xINbAIlRp/view?usp=shari
 
 Place the file here:
 
-```text
+```bash
 weights/
 └── loftr_outdoor.ckpt
 ```
